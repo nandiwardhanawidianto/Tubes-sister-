@@ -45,7 +45,6 @@ while True:
             print("Ada", app_count,"aplikasi yang bisa di-upgrade")
         else:
             print("Tidak ada aplikasi yang perlu di-update")
-            break
     elif (command.casefold() == "list"):
         if (not os.path.isfile('./client_log.pkl')):
             print("Tidak ada aplikasi yang terinstall")
@@ -55,21 +54,19 @@ while True:
     elif (command.casefold() == "upgrade"):
         if (app_count == 0): #belum update
             print("Tidak ada yang perlu di-upgrade")
-            break
         else:
             if (not os.path.isfile('./client_log.pkl')):
                 client_log = open("client_log.pkl", "wb")
                 pickle.dump(app_ver, client_log)
                 client_log.close()
                 print("4 aplikasi berhasil di-upgrade")
-                break
             else:
                 for key in client_ver:
                     if (app_ver[key] > client_ver[key]):
                         client_ver[key] = app_ver[key]
-                    client_log = open("client_log.pkl", "wb")
-                    pickle.dump(client_ver, client_log)
-                    client_log.close()
-                    print(app_count, "aplikasi berhasil di-upgrade")
+                client_log = open("client_log.pkl", "wb")
+                pickle.dump(client_ver, client_log)
+                client_log.close()
+                print(app_count, "aplikasi berhasil di-upgrade")
 
 sock.close()
